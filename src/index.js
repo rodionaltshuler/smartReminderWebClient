@@ -9,6 +9,7 @@ import './styles/styles.css';
 import '../node_modules/bootstrap/dist/css/bootstrap-theme.min.css';
 import initialState from './store/initialState';
 
+console.log('Initial state: ' + JSON.stringify(initialState));
 const store = configureStore(initialState);
 
 render(

@@ -9,9 +9,7 @@ class ItemListsPage extends React.Component {
     super(props, context);
 
     this.state = {
-      itemsList: {
-        name: ""
-      }
+      unsavedItemsListName: ""
     };
 
     this.onNameChange = this.onNameChange.bind(this);
@@ -19,13 +17,12 @@ class ItemListsPage extends React.Component {
   }
 
   onNameChange(event) {
-    const list = this.state.itemsList;
-    list.name = event.target.value;
-    this.setState({itemsList: list});
+    const unsavedItemsListName = event.target.value;
+    this.setState({ unsavedItemsListName });
   }
 
   onClickSave() {
-    this.props.actions.addItemsList(this.state.itemsList);
+    this.props.actions.addItemsList(this.state.unsavedItemsListName);
   }
 
   listRow(itemsList, index) {
@@ -40,7 +37,7 @@ class ItemListsPage extends React.Component {
         <h2>Add List</h2>
         <input type="text"
                onChange={this.onNameChange}
-               value={this.state.itemsList.name}/>
+               value={this.state.unsavedItemsListName}/>
 
         <input
           type="submit"
@@ -58,7 +55,7 @@ ItemListsPage.propTypes = {
 
 function mapStateToProps(state, ownProps) {
   return {
-    itemLists: state.itemLists
+    itemLists: state.entities.itemLists
   };
 }
 

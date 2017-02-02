@@ -7,8 +7,9 @@ import {Provider} from 'react-redux';
 import routes from './routes';
 import './styles/styles.css';
 import '../node_modules/bootstrap/dist/css/bootstrap-theme.min.css';
+import initialState from './store/initialState';
 
-const store = configureStore();
+const store = configureStore(initialState);
 
 render(
   <Provider store={store}>

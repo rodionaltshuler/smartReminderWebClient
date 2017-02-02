@@ -1,6 +1,8 @@
+import * as types from './actionTypes';
+
 export function addItemsList(itemsList) {
   return {
-    type: 'ADD_ITEMS_LIST',
+    type: types.ADD_ITEMS_LIST,
     itemsList
   };
 }

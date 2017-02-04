@@ -1,8 +1,6 @@
 const initialState = {
-  entities: {
-    itemLists: [],
-    items: []
-  }
+  itemLists: [],
+  items: []
 };
 
 export default initialState;

@@ -6,3 +6,12 @@ export function addItemsList(itemsListName) {
     itemsListName
   };
 }
+
+export function removeItemsList(itemsList) {
+
+  return {
+      type: types.REMOVE_ITEMS_LIST,
+      itemsList
+  };
+
+}

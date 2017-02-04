@@ -18,7 +18,7 @@ class AddItem extends React.Component {
 
     this.onSave.bind(this);
     this.onItemNameChange.bind(this);
-  };
+  }
 
   onSave(event) {
     //TODO remove item action
@@ -47,7 +47,7 @@ class AddItem extends React.Component {
 }
 
 AddItem.PropTypes = {
-  itemsList: React.PropTypes.object.isRequired
+  //itemsList: React.PropTypes.object.isRequired
 };
 
 function mapStateToProps(state, ownProps) {

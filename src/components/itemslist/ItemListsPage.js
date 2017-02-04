@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import  * as itemListsActions from '../../actions/itemListsActions';
 import {bindActionCreators} from 'redux';
+import ItemsListRow from './ItemsListRow';
 
 class ItemListsPage extends React.Component {
 
@@ -14,26 +15,50 @@ class ItemListsPage extends React.Component {
 
     this.onNameChange = this.onNameChange.bind(this);
     this.onClickSave = this.onClickSave.bind(this);
+    this.onRemoveItemsList = this.onRemoveItemsList.bind(this);
+    this.itemsListId = this.itemsListId.bind(this);
   }
 
   onNameChange(event) {
     const unsavedItemsListName = event.target.value;
-    this.setState({ unsavedItemsListName });
+    this.setState({unsavedItemsListName});
   }
 
   onClickSave() {
     this.props.actions.addItemsList(this.state.unsavedItemsListName);
   }
 
-  listRow(itemsList, index) {
-    return <div key={index}>{itemsList.name}</div>;
+  onRemoveItemsList(itemsList) {
+    if (itemsList) {
+      console.log("OnRemoveItemsList arg: " + JSON.stringify(itemsList));
+      this.props.actions.removeItemsList(itemsList);
+    }
+  }
+
+  itemsListId(itemsList) {
+    return Math.floor(Math.random() * 1000);
   }
 
   render() {
     return (
       <div>
         <h1>Your lists</h1>
-        {this.props.itemLists.map(this.listRow)}
+        <ul>
+          {this.props.itemLists.map(
+            itemsList => {
+              const id = this.itemsListId(itemsList);
+              console.log('id is ' + id);
+              return (
+                <ItemsListRow
+                  key={id}
+                  index={id}
+                  itemsList={itemsList}
+                  removeItemHandler={this.onRemoveItemsList}
+                />
+              );
+            }
+          )}
+        </ul>
         <h2>Add List</h2>
         <input type="text"
                onChange={this.onNameChange}
@@ -55,11 +80,11 @@ ItemListsPage.propTypes = {
 
 function mapStateToProps(state, ownProps) {
   return {
-    itemLists: state.entities.itemLists
+    itemLists: state.itemLists
   };
 }
 
-function mapDispatchToProps(dispatch ) {
+function mapDispatchToProps(dispatch) {
   return {
     actions: bindActionCreators(itemListsActions, dispatch)
   };

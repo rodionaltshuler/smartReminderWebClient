@@ -23,7 +23,7 @@ class ItemLists extends React.Component {
                 <ItemsListRow
                   key={itemsList._id}
                   itemsList={itemsList}
-                  removeItemHandler={() => this.onRemoveItemsList(itemsList)}
+                  removeItemHandler={this.onRemoveItemsList}
                 />
               );
             }

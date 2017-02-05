@@ -2,8 +2,13 @@ import React from 'react';
 
 class ItemsListRow extends React.Component {
 
-  constructor(context, props) {
-    super(context, props);
+  constructor(props, context) {
+    super(props, context);
+    this.removeItemsList = this.removeItemsList.bind(this, this.props.itemsList);
+  }
+
+  removeItemsList(itemsList) {
+    this.props.removeItemHandler(itemsList);
   }
 
   render() {
@@ -11,7 +16,7 @@ class ItemsListRow extends React.Component {
     return (
       <li>
         <a href={'/lists/' + itemsList._id}>{itemsList.name}</a>
-        <input type="submit" value="Remove" onClick={this.props.removeItemHandler}/>
+        <input type="submit" value="Remove" onClick={this.removeItemsList}/>
       </li>);
   }
 

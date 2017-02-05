@@ -61,8 +61,11 @@ ItemsPage.propTypes = {
 
 function mapStateToProps(state, ownProps) {
   return {
-    items: state.items,
+    items: state.items
+      .filter(item => item.listId === ownProps.params.id),
+
     itemLists: state.itemLists
+      .filter(itemsList => itemsList._id === ownProps.params.id)
   };
 }
 

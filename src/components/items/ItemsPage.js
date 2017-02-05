@@ -26,26 +26,34 @@ class ItemsPage extends React.Component {
 
   findListName(listId) {
     const itemsList = this.props.itemLists.find(itemsList => itemsList._id === listId);
-    return itemsList? itemsList.name : '#' + listId;
+    return itemsList ? itemsList.name : '#' + listId;
   }
 
   render() {
     return (
       <div>
-        <h2>{this.findListName(this.props.params.id)}</h2>
-
-        {this.props.items.map(
-          item => {
-            return (
-              <ItemRow
-                key={item._id}
-                item={item}
-                removeItemHandler={() => this.removeItemHandler(item._id)}
-              />
-            );
-          }
-        )}
-
+        <table className="table">
+          <thead>
+          <tr>
+            <th>{this.findListName(this.props.params.id)}</th>
+            <th>&nbsp;</th>
+          </tr>
+          </thead>
+          <tbody>
+          {this.props.items.map(
+            item => {
+              return (
+                <ItemRow
+                  key={item._id}
+                  item={item}
+                  removeItemHandler={() => this.removeItemHandler(item._id)}
+                />
+              );
+            }
+          )}
+          </tbody>
+        </table>
+        <br/>
         <AddItem addItemHandler={this.addItemHandler}/>
       </div>
     );

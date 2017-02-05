@@ -15,21 +15,27 @@ class ItemLists extends React.Component {
 
   render() {
     return (
-      <div>
-        <ul>
-          {this.props.itemLists.map(
-            itemsList => {
-              return (
-                <ItemsListRow
-                  key={itemsList._id}
-                  itemsList={itemsList}
-                  removeItemHandler={this.onRemoveItemsList}
-                />
-              );
-            }
-          )}
-        </ul>
-      </div>
+      <table className="table">
+        <thead>
+        <tr>
+          <th>List name</th>
+          <th>&nbsp;</th>
+        </tr>
+        </thead>
+        <tbody>
+        {this.props.itemLists.map(
+          itemsList => {
+            return (
+              <ItemsListRow
+                key={itemsList._id}
+                itemsList={itemsList}
+                removeItemHandler={this.onRemoveItemsList}
+              />
+            );
+          }
+        )}
+        </tbody>
+      </table>
     );
   }
 

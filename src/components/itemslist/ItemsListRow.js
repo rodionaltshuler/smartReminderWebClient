@@ -14,10 +14,11 @@ class ItemsListRow extends React.Component {
   render() {
     const itemsList = this.props.itemsList;
     return (
-      <li>
-        <a href={'/lists/' + itemsList._id}>{itemsList.name}</a>
-        <input type="submit" value="Remove" onClick={this.removeItemsList}/>
-      </li>);
+      <tr>
+        <td><a href={'/lists/' + itemsList._id}>{itemsList.name}</a></td>
+        <td><input type="submit" value="Remove" onClick={this.removeItemsList}/></td>
+      </tr>
+    );
   }
 
 }

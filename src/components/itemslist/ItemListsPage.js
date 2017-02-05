@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import  * as itemListsActions from '../../actions/itemListsActions';
 import {bindActionCreators} from 'redux';
-import ItemsListRow from './ItemsListRow';
+import ItemLists from './ItemLists';
 
 class ItemListsPage extends React.Component {
 
@@ -38,20 +38,7 @@ class ItemListsPage extends React.Component {
     return (
       <div>
         <h1>Your lists</h1>
-        <ul>
-          {this.props.itemLists.map(
-            itemsList => {
-              return (
-                <ItemsListRow
-                  key={itemsList._id}
-                  index={itemsList._id}
-                  itemsList={itemsList}
-                  removeItemHandler={this.onRemoveItemsList}
-                />
-              );
-            }
-          )}
-        </ul>
+        <ItemLists itemLists={this.props.itemLists} removeItemHandler={this.onRemoveItemsList}/>
         <h2>Add List</h2>
         <input type="text"
                onChange={this.onNameChange}

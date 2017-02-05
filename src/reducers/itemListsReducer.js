@@ -9,6 +9,9 @@ export default function itemListsReducer(state = [], action) {
   console.log(JSON.stringify(state));
 
   switch (action.type) {
+    case types.LOAD_ITEM_LISTS_SUCCESS: {
+      return action.itemLists;
+    }
     case types.ADD_ITEMS_LIST: {
       console.log('creating new store with a name: ' + action.itemsListName);
       const newItemsList = {

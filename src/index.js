@@ -8,9 +8,11 @@ import routes from './routes';
 import './styles/styles.css';
 import '../node_modules/bootstrap/dist/css/bootstrap-theme.min.css';
 import initialState from './store/initialState';
+import {loadItemLists} from './actions/itemListsActions';
 
 console.log('Initial state: ' + JSON.stringify(initialState));
 const store = configureStore(initialState);
+store.dispatch(loadItemLists());
 
 render(
   <Provider store={store}>

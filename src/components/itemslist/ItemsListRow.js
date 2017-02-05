@@ -18,7 +18,7 @@ class ItemsListRow extends React.Component {
     const itemsList = this.props.itemsList;
     return (
       <li key={index}>
-        {itemsList.name}
+        <a href={'/lists/' + itemsList._id}>{itemsList.name}</a>
         <input type="submit" value="Remove" onClick={() => this.removeItem(itemsList)}/>
       </li>);
   }

@@ -1,40 +1,32 @@
 import React from "react";
-import {connect} from 'react-redux';
-import  * as itemListsActions from '../../actions/itemListsActions';
-import {bindActionCreators} from 'redux';
-
 
 class AddItem extends React.Component {
 
   constructor(props, context) {
     super(props, context);
 
-    this.state = {
-      itemsList: props.itemsList,
-      newItem: {
-        name: ""
-      }
-    };
+    this.state = {newItemName: ""};
 
-    this.onSave.bind(this);
-    this.onItemNameChange.bind(this);
+    this.onSave = this.onSave.bind(this);
+    this.onItemNameChange = this.onItemNameChange.bind(this);
   }
 
   onSave(event) {
-    //TODO remove item action
+    console.log("Saving new item: " + this.state.newItemName);
+    this.props.addItemHandler(this.state.newItemName);
   }
 
   onItemNameChange(event) {
-    //TODO input changed
+    this.setState({newItemName: event.target.value});
   }
-
 
   render() {
     return (
       <div>
         <input type="text"
                onChange={this.onItemNameChange}
-               value={this.state.newItem.name}/>
+               value={this.state.newItemName}
+        />
 
         <input type="submit"
                value="Add"
@@ -46,18 +38,9 @@ class AddItem extends React.Component {
 
 }
 
-AddItem.PropTypes = {
-  //itemsList: React.PropTypes.object.isRequired
+AddItem.propTypes = {
+  addItemHandler: React.PropTypes.func.isRequired
 };
 
-function mapStateToProps(state, ownProps) {
-  //TODO
-  return null;
-}
+export default AddItem;
 
-function mapDispatchToProps(dispatch) {
-  //TODO
-  return null;
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(AddItem);

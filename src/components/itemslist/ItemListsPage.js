@@ -16,7 +16,6 @@ class ItemListsPage extends React.Component {
     this.onNameChange = this.onNameChange.bind(this);
     this.onClickSave = this.onClickSave.bind(this);
     this.onRemoveItemsList = this.onRemoveItemsList.bind(this);
-    this.itemsListId = this.itemsListId.bind(this);
   }
 
   onNameChange(event) {
@@ -35,10 +34,6 @@ class ItemListsPage extends React.Component {
     }
   }
 
-  itemsListId(itemsList) {
-    return Math.floor(Math.random() * 1000);
-  }
-
   render() {
     return (
       <div>
@@ -46,12 +41,10 @@ class ItemListsPage extends React.Component {
         <ul>
           {this.props.itemLists.map(
             itemsList => {
-              const id = this.itemsListId(itemsList);
-              console.log('id is ' + id);
               return (
                 <ItemsListRow
-                  key={id}
-                  index={id}
+                  key={itemsList._id}
+                  index={itemsList._id}
                   itemsList={itemsList}
                   removeItemHandler={this.onRemoveItemsList}
                 />

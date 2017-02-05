@@ -1,5 +1,9 @@
 import * as types from '../actions/actionTypes';
 
+function itemsListId() {
+  return Math.floor(Math.random() * 1000);
+}
+
 export default function itemListsReducer(state = [], action) {
   console.log('itemListsReducer got initial state:');
   console.log(JSON.stringify(state));
@@ -7,7 +11,10 @@ export default function itemListsReducer(state = [], action) {
   switch (action.type) {
     case types.ADD_ITEMS_LIST: {
       console.log('creating new store with a name: ' + action.itemsListName);
-      const newItemsList = { name: action.itemsListName };
+      const newItemsList = {
+        name: action.itemsListName,
+        _id: itemsListId()
+      };
       const newState = [...state, newItemsList];
       console.log('returning new state:');
       console.log(JSON.stringify(newState));

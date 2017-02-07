@@ -4,6 +4,7 @@ import  * as itemListsActions from '../../actions/itemListsActions';
 import {bindActionCreators} from 'redux';
 import ItemLists from './ItemLists';
 import {browserHistory} from 'react-router';
+import toastr from 'toastr';
 
 class ItemListsPage extends React.Component {
 
@@ -11,13 +12,16 @@ class ItemListsPage extends React.Component {
     super(props, context);
 
     this.state = {
-      unsavedItemsListName: ""
+      unsavedItemsListName: "",
+      errors: {},
+      saving: false
     };
 
     this.onNameChange = this.onNameChange.bind(this);
     this.onClickSave = this.onClickSave.bind(this);
     this.onRemoveItemsList = this.onRemoveItemsList.bind(this);
     this.onShowListContents = this.onShowListContents.bind(this);
+    this.showSaved = this.showSaved.bind(this);
   }
 
   onNameChange(event) {
@@ -26,7 +30,14 @@ class ItemListsPage extends React.Component {
   }
 
   onClickSave() {
-    this.props.actions.addItemsList(this.state.unsavedItemsListName);
+    this.setState({saving: true});
+    this.props.actions.addItemsList(this.state.unsavedItemsListName)
+      .then(() => this.showSaved());
+  }
+
+  showSaved() {
+    toastr.success('Items list ' + this.state.unsavedItemsListName + ' saved');
+    this.setState({saving: false, unsavedItemsListName: ''})
   }
 
   onRemoveItemsList(itemsList) {
@@ -40,7 +51,6 @@ class ItemListsPage extends React.Component {
     if (itemsList) {
       console.log("onShowListContents arg: " + JSON.stringify(itemsList));
       browserHistory.push('/lists/' + itemsList._id);
-      //TODO show items list
     }
   }
 
@@ -59,7 +69,8 @@ class ItemListsPage extends React.Component {
 
         <input
           type="submit"
-          value="Save"
+          disabled={this.state.saving}
+          value={this.state.saving ? 'Saving...' : 'Save'}
           onClick={this.onClickSave}/>
       </div>
     );
@@ -68,7 +79,7 @@ class ItemListsPage extends React.Component {
 
 ItemListsPage.propTypes = {
   itemLists: React.PropTypes.array.isRequired,
-  actions: React.PropTypes.object.isRequired
+  actions: React.PropTypes.object.isRequired,
 };
 
 function mapStateToProps(state, ownProps) {

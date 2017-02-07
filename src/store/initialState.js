@@ -1,6 +1,7 @@
 const initialState = {
   itemLists: [],
-  items: []
+  items: [],
+  ajaxCallsInProgress: 0
 };
 
 export default initialState;

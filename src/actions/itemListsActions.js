@@ -1,6 +1,6 @@
 import * as types from './actionTypes';
 import itemListsApi from '../api/mockItemListsApi';
-import {beginAjaxCall} from './ajaxStatusActions';
+import {beginAjaxCall, ajaxCallError} from './ajaxStatusActions';
 
 export function addItemsList(itemsListName) {
   return function (dispatch) {
@@ -10,6 +10,7 @@ export function addItemsList(itemsListName) {
         dispatch(addItemsListSuccess(itemsList));
       })
       .catch(error => {
+        dispatch(ajaxCallError());
         throw error;
       });
   };
@@ -29,7 +30,8 @@ export function removeItemsList(itemsList) {
       .then(() => {
         dispatch(removeItemsListSuccess(itemsList));
       })
-      .error(error => {
+      .catch(error => {
+        dispatch(ajaxCallError());
         throw error;
       });
   };

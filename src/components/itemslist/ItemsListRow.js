@@ -21,8 +21,8 @@ class ItemsListRow extends React.Component {
     return (
       <tr>
         <td>{itemsList.name}</td>
-        <td><input type="submit" value="Open" onClick={this.showItemsList}/></td>
-        <td><input type="submit" value="Remove" onClick={this.removeItemsList}/></td>
+        <td><input type="submit" className="btn" value="Open" onClick={this.showItemsList}/></td>
+        <td><input type="submit" className="btn btn-danger" value="Remove" onClick={this.removeItemsList}/></td>
       </tr>
     );
   }

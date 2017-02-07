@@ -9,7 +9,7 @@ class ItemRow extends React.Component {
   render() {
     return (<tr>
       <td>{this.props.item.name}</td>
-      <td><input type="submit" value="Done" onClick={this.props.removeItemHandler}/></td>
+      <td><input type="submit" className="btn" value="Done" onClick={this.props.removeItemHandler}/></td>
     </tr>);
   }
 }

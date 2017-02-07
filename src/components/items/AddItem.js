@@ -30,6 +30,7 @@ class AddItem extends React.Component {
 
         <input type="submit"
                value="Add"
+               className="btn"
                onClick={this.onSave}/>
       </div>
     );

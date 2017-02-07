@@ -13,3 +13,8 @@ a.active {
 nav {
   padding-top: 20px;
 }
+
+.btn {
+  color: #ffffff;
+  background: green;
+}

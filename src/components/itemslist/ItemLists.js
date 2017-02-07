@@ -21,13 +21,6 @@ class ItemLists extends React.Component {
   render() {
     return (
       <table className="table">
-        <thead>
-        <tr>
-          <th>List name</th>
-          <th>&nbsp;</th>
-          <th>&nbsp;</th>
-        </tr>
-        </thead>
         <tbody>
         {this.props.itemLists.map(
           itemsList => {

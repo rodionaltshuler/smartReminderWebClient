@@ -19,7 +19,7 @@ function replaceAll(str, find, replace) {
 }
 
 const generateId = (itemsList) => {
-  return replaceAll(itemsList.name, ' ', '-');
+  return 'id-' + replaceAll(itemsList.name, ' ', '-');
 };
 
 
@@ -32,8 +32,8 @@ class ItemListsApi {
     });
   }
 
-  static saveItemsList(itemsList) {
-    itemsList = Object.assign({}, itemsList); // to avoid manipulating object passed in.
+  static saveItemsList(itemsListName) {
+    const itemsList = Object.assign({}, {name: itemsListName}); // to avoid manipulating object passed in.
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         // Simulate server-side validation

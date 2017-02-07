@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import  * as itemListsActions from '../../actions/itemListsActions';
 import {bindActionCreators} from 'redux';
 import ItemLists from './ItemLists';
+import {browserHistory} from 'react-router';
 
 class ItemListsPage extends React.Component {
 
@@ -16,6 +17,7 @@ class ItemListsPage extends React.Component {
     this.onNameChange = this.onNameChange.bind(this);
     this.onClickSave = this.onClickSave.bind(this);
     this.onRemoveItemsList = this.onRemoveItemsList.bind(this);
+    this.onShowListContents = this.onShowListContents.bind(this);
   }
 
   onNameChange(event) {
@@ -34,11 +36,22 @@ class ItemListsPage extends React.Component {
     }
   }
 
+  onShowListContents(itemsList) {
+    if (itemsList) {
+      console.log("onShowListContents arg: " + JSON.stringify(itemsList));
+      browserHistory.push('/lists/' + itemsList._id);
+      //TODO show items list
+    }
+  }
+
   render() {
     return (
       <div>
         <h1>Your lists</h1>
-        <ItemLists itemLists={this.props.itemLists} removeItemHandler={this.onRemoveItemsList}/>
+        <ItemLists
+          itemLists={this.props.itemLists}
+          removeItemHandler={this.onRemoveItemsList}
+          showListContentsHandler={this.onShowListContents}/>
         <h2>Add List</h2>
         <input type="text"
                onChange={this.onNameChange}

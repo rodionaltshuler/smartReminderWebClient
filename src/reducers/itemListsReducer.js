@@ -13,12 +13,8 @@ export default function itemListsReducer(state = [], action) {
       return action.itemLists;
     }
     case types.ADD_ITEMS_LIST: {
-      console.log('creating new store with a name: ' + action.itemsListName);
-      const newItemsList = {
-        name: action.itemsListName,
-        _id: itemsListId()
-      };
-      const newState = [...state, newItemsList];
+      console.log('creating new store with a name: ' + action.itemsList.name);
+      const newState = [...state, action.itemsList];
       console.log('returning new state:');
       console.log(JSON.stringify(newState));
       return newState;

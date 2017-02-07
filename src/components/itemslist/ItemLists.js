@@ -7,10 +7,15 @@ class ItemLists extends React.Component {
     super(props, context);
 
     this.onRemoveItemsList = this.onRemoveItemsList.bind(this);
+    this.onShowListContents = this.onShowListContents.bind(this);
   }
 
   onRemoveItemsList(itemsList) {
     this.props.removeItemHandler(itemsList);
+  }
+
+  onShowListContents(itemsList) {
+    this.props.showListContentsHandler(itemsList);
   }
 
   render() {
@@ -19,6 +24,7 @@ class ItemLists extends React.Component {
         <thead>
         <tr>
           <th>List name</th>
+          <th>&nbsp;</th>
           <th>&nbsp;</th>
         </tr>
         </thead>
@@ -30,6 +36,7 @@ class ItemLists extends React.Component {
                 key={itemsList._id}
                 itemsList={itemsList}
                 removeItemHandler={this.onRemoveItemsList}
+                showItemsListHandler={this.onShowListContents}
               />
             );
           }
@@ -42,7 +49,8 @@ class ItemLists extends React.Component {
 }
 ItemLists.propTypes = {
   itemLists: React.PropTypes.array.isRequired,
-  removeItemHandler: React.PropTypes.func.isRequired
+  removeItemHandler: React.PropTypes.func.isRequired,
+  showListContentsHandler: React.PropTypes.func.isRequired
 };
 
 export default ItemLists;

@@ -1,11 +1,11 @@
 import * as types from './actionTypes';
-import itemListsApi from '../api/mockItemListsApi';
+import serverItemListsApi from '../serverapi/itemListsApi';
 import {beginAjaxCall, ajaxCallError} from './ajaxStatusActions';
 
 export function addItemsList(itemsListName) {
   return function (dispatch) {
     dispatch(beginAjaxCall());
-    return itemListsApi.saveItemsList(itemsListName)
+    return serverItemListsApi.saveItemsList(itemsListName)
       .then(itemsList => {
         dispatch(addItemsListSuccess(itemsList));
       })
@@ -26,7 +26,7 @@ export function addItemsListSuccess(itemsList) {
 export function removeItemsList(itemsList) {
   return function (dispatch) {
     dispatch(beginAjaxCall());
-    return itemListsApi.deleteItemsList(itemsList._id)
+    return serverItemListsApi.deleteItemsList(itemsList._id)
       .then(() => {
         dispatch(removeItemsListSuccess(itemsList));
       })
@@ -48,11 +48,12 @@ export function removeItemsListSuccess(itemsList) {
 export function loadItemLists() {
   return function (dispatch) {
     dispatch(beginAjaxCall());
-    return itemListsApi.getAllItemLists()
+    return serverItemListsApi.getAllItemLists()
       .then(lists => {
         dispatch(loadItemListsSuccess(lists));
       })
       .catch(error => {
+        dispatch(ajaxCallError());
         throw error;
       });
   };

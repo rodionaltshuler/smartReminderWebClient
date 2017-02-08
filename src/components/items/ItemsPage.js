@@ -15,6 +15,10 @@ class ItemsPage extends React.Component {
     this.findListName = this.findListName.bind(this);
   }
 
+  componentDidMount() {
+    this.props.actions.loadItemsForList(this.props.params.id);
+  }
+
   addItemHandler(itemName) {
     const listId = this.props.params.id;
     this.props.actions.addItem(listId, itemName);
@@ -40,7 +44,9 @@ class ItemsPage extends React.Component {
           </tr>
           </thead>
           <tbody>
-          {this.props.items.map(
+          {this.props.items
+            .filter(item => item.itemsList === this.props.params.id)
+            .map(
             item => {
               return (
                 <ItemRow
@@ -69,11 +75,8 @@ ItemsPage.propTypes = {
 
 function mapStateToProps(state, ownProps) {
   return {
-    items: state.items
-      .filter(item => item.listId === ownProps.params.id),
-
+    items: state.items,
     itemLists: state.itemLists
-      .filter(itemsList => itemsList._id === ownProps.params.id)
   };
 }
 

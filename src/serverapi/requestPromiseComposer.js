@@ -1,3 +1,6 @@
+import accessToken from './accessToken';
+import config from './config';
+
 export default function(request) {
   return createPromise(createRequest(request));
 }

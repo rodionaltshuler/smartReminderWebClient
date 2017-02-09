@@ -1,4 +1,5 @@
 const initialState = {
+  me: null,
   itemLists: [],
   items: [],
   ajaxCallsInProgress: 0

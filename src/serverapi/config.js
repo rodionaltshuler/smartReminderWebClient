@@ -1,11 +1,13 @@
 let googleCloudConfig = {
   baseUrl: 'https://smart-reminder-us.appspot.com',
-  baseApiUrl: 'https://smart-reminder-us.appspot.com/api/v1'
+  baseApiUrl: 'https://smart-reminder-us.appspot.com/api/v1',
+  fbAppId: '1203169209731550'
 };
 
 let localConfig = {
   baseUrl: 'http://localhost:3001',
-  baseApiUrl: 'http://localhost:3001/api/v1'
+  baseApiUrl: 'http://localhost:3001/api/v1',
+  fbAppId: '1203169209731550'
 };
 
 let configs = {

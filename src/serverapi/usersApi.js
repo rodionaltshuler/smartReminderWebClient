@@ -8,7 +8,7 @@ class usersApi {
       method: 'POST',
       body: encodeURI('accessToken=' + facebookAccessToken)
     });
-  };
+  }
 
 
   static getMe() {

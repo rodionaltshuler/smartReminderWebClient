@@ -1,10 +1,9 @@
 import React, {PropTypes} from 'react';
 import {Link, IndexLink} from 'react-router';
 import LoadingDots from './LoadingDots';
-import MeBar from '../profile/MeBar';
+import MeBar from './MeBar';
 
-const Header = ({loading}) => {
-  const user = {name: 'Rodion', oauth: 664522183622806};
+const Header = ({loading, me}) => {
   return (
     <div>
       <nav>
@@ -14,14 +13,15 @@ const Header = ({loading}) => {
         {loading && <LoadingDots interval={100} dots={20}/>}
       </nav>
       <br/>
-      <MeBar user={user} />
+      <MeBar me={me} />
       <br />
     </div>
   );
 };
 
 Header.propTypes = {
-  loading: React.PropTypes.bool.isRequired
+  loading: React.PropTypes.bool.isRequired,
+  me: React.PropTypes.object
 };
 
 export default Header;

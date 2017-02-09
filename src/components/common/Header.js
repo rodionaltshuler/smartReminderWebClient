@@ -15,6 +15,7 @@ const Header = ({loading}) => {
       </nav>
       <br/>
       <MeBar user={user} />
+      <br />
     </div>
   );
 };

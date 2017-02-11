@@ -1,8 +1,9 @@
+/*eslint-disable import/default */
 import 'babel-polyfill';
 import {Router, browserHistory} from 'react-router';
 import React from 'react';
 import {render} from 'react-dom';
-import configureStore from './store/configureStore';
+import configureStore from './store/configureStore.dev';
 import {Provider} from 'react-redux';
 import routes from './routes';
 import './styles/styles.css';
@@ -10,7 +11,6 @@ import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import '../node_modules/bootstrap/dist/css/bootstrap-theme.min.css';
 import '../node_modules/toastr/build/toastr.min.css';
 import initialState from './store/initialState';
-import {loadItemLists} from './actions/itemListsActions';
 
 console.log('Initial state: ' + JSON.stringify(initialState));
 const store = configureStore(initialState);

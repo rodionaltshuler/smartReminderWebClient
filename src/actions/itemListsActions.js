@@ -2,10 +2,10 @@ import * as types from './actionTypes';
 import serverItemListsApi from '../serverapi/itemListsApi';
 import {beginAjaxCall, ajaxCallError} from './ajaxStatusActions';
 
-export function addItemsList(itemsListName) {
+export function addItemsList(user, itemsListName) {
   return function (dispatch) {
     dispatch(beginAjaxCall());
-    return serverItemListsApi.saveItemsList(itemsListName)
+    return serverItemListsApi.saveItemsList(user, itemsListName)
       .then(itemsList => {
         dispatch(addItemsListSuccess(itemsList));
       })
@@ -23,10 +23,10 @@ export function addItemsListSuccess(itemsList) {
   };
 }
 
-export function removeItemsList(itemsList) {
+export function removeItemsList(user, itemsList) {
   return function (dispatch) {
     dispatch(beginAjaxCall());
-    return serverItemListsApi.deleteItemsList(itemsList._id)
+    return serverItemListsApi.deleteItemsList(user, itemsList._id)
       .then(() => {
         dispatch(removeItemsListSuccess(itemsList));
       })
@@ -45,10 +45,10 @@ export function removeItemsListSuccess(itemsList) {
   };
 }
 
-export function loadItemLists() {
+export function loadItemLists(user) {
   return function (dispatch) {
     dispatch(beginAjaxCall());
-    return serverItemListsApi.getAllItemLists()
+    return serverItemListsApi.getAllItemLists(user)
       .then(lists => {
         dispatch(loadItemListsSuccess(lists));
       })

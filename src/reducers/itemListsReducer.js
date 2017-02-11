@@ -1,9 +1,5 @@
 import * as types from '../actions/actionTypes';
 
-function itemsListId() {
-  return Math.floor(Math.random() * 1000);
-}
-
 export default function itemListsReducer(state = [], action) {
   console.log('itemListsReducer got initial state:');
   console.log(JSON.stringify(state));

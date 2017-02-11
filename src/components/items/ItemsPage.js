@@ -16,21 +16,27 @@ class ItemsPage extends React.Component {
   }
 
   componentDidMount() {
-    this.props.actions.loadItemsForList(this.props.params.id);
+    this.props.actions.loadItemsForList(this.props.me, this.props.params.id);
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.me !== this.props.me) {
+      this.props.actions.loadItemsForList(this.props.me, this.props.params.id);
+    }
   }
 
   addItemHandler(itemName) {
     const listId = this.props.params.id;
-    this.props.actions.addItem(listId, itemName);
+    this.props.actions.addItem(this.props.me, listId, itemName);
   }
 
   removeItemHandler(itemId) {
-    this.props.actions.removeItem(itemId);
+    this.props.actions.removeItem(this.props.me, itemId);
   }
 
   findListName(listId) {
     const itemsList = this.props.itemLists.find(itemsList => itemsList._id === listId);
-    return itemsList ? itemsList.name : '#' + listId;
+    return itemsList ? itemsList.name : 'Please log in';
   }
 
   render() {
@@ -70,13 +76,15 @@ ItemsPage.propTypes = {
   params: React.PropTypes.object.isRequired,
   items: React.PropTypes.array.isRequired,
   itemLists: React.PropTypes.array.isRequired,
-  actions: React.PropTypes.object.isRequired
+  actions: React.PropTypes.object.isRequired,
+  me: React.PropTypes.object
 };
 
 function mapStateToProps(state, ownProps) {
   return {
     items: state.items,
-    itemLists: state.itemLists
+    itemLists: state.itemLists,
+    me: state.me
   };
 }
 

@@ -1,19 +1,20 @@
 import config from './config';
-import accessToken from './accessToken';
 
 class ItemsApi {
 
-  static getItems(listId) {
+  static getItems(user, listId) {
     const request = createRequest({
+      user,
       path: '/item',
       params: {listId}
     });
     return createPromise(request);
   }
 
-  static addItem(itemName, listId) {
+  static addItem(user, itemName, listId) {
     console.log('Saving item with name '+ itemName + ' and listId ' + listId);
     const request = createRequest({
+      user,
       path: '/item',
       method: 'POST',
       body: encodeURI('name=' + itemName + '&listId=' + listId)
@@ -21,8 +22,9 @@ class ItemsApi {
     return createPromise(request);
   }
 
-  static removeItem(itemId) {
+  static removeItem(user, itemId) {
     const request = createRequest({
+      user,
       path: '/item/' + itemId,
       method: 'DELETE'
     });
@@ -44,12 +46,12 @@ function createPromise(request) {
   });
 }
 
-function createRequest({path, method, body, params}) {
+function createRequest({user, path, method, body, params}) {
   let url = new URL(config.baseApiUrl + path);
   if (params) {
     Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
   }
-  const token = accessToken;
+  const token = user ? user.accessToken : null;
   const init = {
     mode: 'cors',
     method: method || 'get',

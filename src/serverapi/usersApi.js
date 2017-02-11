@@ -11,14 +11,16 @@ class usersApi {
   }
 
 
-  static getMe() {
+  static getMe(accessToken) {
     return requestPromiseComposer({
+      user: {accessToken},
       path: '/me'
     });
   }
 
-  static getUser(userId) {
+  static getUser(accessToken, userId) {
     return requestPromiseComposer({
+      user: {accessToken},
       path: '/users/' + userId
     });
   }

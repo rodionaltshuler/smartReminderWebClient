@@ -3,10 +3,10 @@ import itemsApi from '../serverapi/itemsApi';
 import {beginAjaxCall, ajaxCallError} from './ajaxStatusActions';
 
 
-export function addItem(itemsListId, itemName) {
+export function addItem(user, itemsListId, itemName) {
   return function (dispatch) {
     dispatch(beginAjaxCall());
-    return itemsApi.addItem(itemName, itemsListId)
+    return itemsApi.addItem(user, itemName, itemsListId)
       .then(item => {
         dispatch(addItemSuccess(item));
       })
@@ -24,10 +24,10 @@ export function addItemSuccess(item) {
   };
 }
 
-export function removeItem(itemId) {
+export function removeItem(user, itemId) {
   return function (dispatch) {
     dispatch(beginAjaxCall());
-    return itemsApi.removeItem(itemId)
+    return itemsApi.removeItem(user, itemId)
       .then(item => {
         dispatch(removeItemSuccess(item._id));
       })
@@ -45,10 +45,10 @@ export function removeItemSuccess(itemId) {
   };
 }
 
-export function loadItemsForList(listId) {
+export function loadItemsForList(user, listId) {
   return function (dispatch) {
     dispatch(beginAjaxCall());
-    return itemsApi.getItems(listId)
+    return itemsApi.getItems(user, listId)
       .then(lists => {
         dispatch(loadItemsForListSuccess(listId, lists));
       })

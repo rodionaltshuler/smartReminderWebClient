@@ -1,4 +1,3 @@
-import accessToken from './accessToken';
 import config from './config';
 
 export default function(request) {
@@ -19,12 +18,12 @@ function createPromise(request) {
   });
 }
 
-function createRequest({path, method, body, params}) {
+function createRequest({user, path, method, body, params}) {
   let url = new URL(config.baseApiUrl + path);
   if (params) {
     Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
   }
-  const token = accessToken;
+  const token = user ? user.accessToken : null;
   const init = {
     mode: 'cors',
     method: method || 'get',

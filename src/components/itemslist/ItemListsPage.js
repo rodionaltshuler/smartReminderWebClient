@@ -24,6 +24,18 @@ class ItemListsPage extends React.Component {
     this.showSaved = this.showSaved.bind(this);
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevProps.me !== this.props.me) {
+      this.props.actions.loadItemLists(this.props.me);
+    }
+  }
+
+  componentDidMount() {
+    if (this.props.me) {
+      this.props.actions.loadItemLists(this.props.me);
+    }
+  }
+
   onNameChange(event) {
     const unsavedItemsListName = event.target.value;
     this.setState({unsavedItemsListName});
@@ -31,7 +43,7 @@ class ItemListsPage extends React.Component {
 
   onClickSave() {
     this.setState({saving: true});
-    this.props.actions.addItemsList(this.state.unsavedItemsListName)
+    this.props.actions.addItemsList(this.props.me, this.state.unsavedItemsListName)
       .then(() =>
         this.showSaved())
       .catch(error => {
@@ -48,7 +60,7 @@ class ItemListsPage extends React.Component {
   onRemoveItemsList(itemsList) {
     if (itemsList) {
       console.log("OnRemoveItemsList arg: " + JSON.stringify(itemsList));
-      this.props.actions.removeItemsList(itemsList)
+      this.props.actions.removeItemsList(this.props.me, itemsList)
         .then(() => {
           toastr.warning('deleted');
         })
@@ -91,12 +103,14 @@ class ItemListsPage extends React.Component {
 
 ItemListsPage.propTypes = {
   itemLists: React.PropTypes.array.isRequired,
-  actions: React.PropTypes.object.isRequired
+  actions: React.PropTypes.object.isRequired,
+  me: React.PropTypes.object
 };
 
 function mapStateToProps(state, ownProps) {
   return {
-    itemLists: state.itemLists
+    itemLists: state.itemLists,
+    me: state.me
   };
 }
 

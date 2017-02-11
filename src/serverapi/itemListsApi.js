@@ -1,22 +1,20 @@
 import config from './config';
-import accessToken from './accessToken';
-
 
 class ItemListsApi {
 
-  static getAllItemLists() {
-    const request = createRequest('/itemLists');
+  static getAllItemLists(user) {
+    const request = createRequest(user, '/itemLists');
     return createPromise(request);
   }
 
-  static saveItemsList(itemsListName) {
+  static saveItemsList(user, itemsListName) {
     const body = encodeURI('name=' + itemsListName);
-    const request = createRequest('/itemLists', 'post', body);
+    const request = createRequest(user, '/itemLists', 'post', body);
     return createPromise(request);
   }
 
-  static deleteItemsList(listId) {
-    const request = createRequest('/itemLists/' + listId, 'delete');
+  static deleteItemsList(user, listId) {
+    const request = createRequest(user, '/itemLists/' + listId, 'delete');
     return createPromise(request);
   }
 }
@@ -35,9 +33,9 @@ function createPromise(request) {
   });
 }
 
-function createRequest(path, method, body) {
+function createRequest(user, path, method, body) {
   const uri = config.baseApiUrl + path;
-  const token = accessToken;
+  const token = user? user.accessToken : null;
   const init = {
     mode: 'cors',
     method: method || 'get',

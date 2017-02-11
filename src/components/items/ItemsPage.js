@@ -12,7 +12,6 @@ class ItemsPage extends React.Component {
     super(props, context);
     this.addItemHandler = this.addItemHandler.bind(this);
     this.removeItemHandler = this.removeItemHandler.bind(this);
-    this.findListName = this.findListName.bind(this);
   }
 
   componentDidMount() {
@@ -34,24 +33,18 @@ class ItemsPage extends React.Component {
     this.props.actions.removeItem(this.props.me, itemId);
   }
 
-  findListName(listId) {
-    const itemsList = this.props.itemLists.find(itemsList => itemsList._id === listId);
-    return itemsList ? itemsList.name : 'Please log in';
-  }
-
   render() {
     return (
       <div>
         <table className="table">
           <thead>
           <tr>
-            <th>{this.findListName(this.props.params.id)}</th>
+            <th>{this.props.currentList ? this.props.currentList.name : "Please log in"}</th>
             <th>&nbsp;</th>
           </tr>
           </thead>
           <tbody>
           {this.props.items
-            .filter(item => item.itemsList === this.props.params.id)
             .map(
             item => {
               return (
@@ -77,14 +70,17 @@ ItemsPage.propTypes = {
   items: React.PropTypes.array.isRequired,
   itemLists: React.PropTypes.array.isRequired,
   actions: React.PropTypes.object.isRequired,
+  currentList: React.PropTypes.object,
   me: React.PropTypes.object
 };
 
 function mapStateToProps(state, ownProps) {
   return {
-    items: state.items,
-    itemLists: state.itemLists,
-    me: state.me
+    items: state.items.filter(item => item.itemsList == ownProps.params.id),
+    me: state.me,
+    currentList: state.itemLists ?
+      state.itemLists.find(itemsList => ownProps.params.id === itemsList._id) :
+      null
   };
 }
 

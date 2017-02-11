@@ -3,7 +3,10 @@ import path from 'path';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 
 const GLOBALS = {
-  'process.env.NODE_ENV': JSON.stringify('production') //set env variable
+  'process.env': {
+    NODE_ENV: JSON.stringify('production'),
+    CONFIG: JSON.stringify('google')
+  }
 };
 
 export default {

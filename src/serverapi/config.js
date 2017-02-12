@@ -7,7 +7,7 @@ let googleCloudConfig = {
 let localConfig = {
   baseUrl: 'http://localhost:3001',
   baseApiUrl: 'http://localhost:3001/api/v1',
-  fbAppId: '1203169209731550'
+  fbAppId: '1633896273294056'
 };
 
 let configs = {

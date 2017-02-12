@@ -2,6 +2,7 @@ const initialState = {
   me: null,
   itemLists: [],
   items: [],
+  users: [],
   ajaxCallsInProgress: 0
 };
 

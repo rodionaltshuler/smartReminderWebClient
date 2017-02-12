@@ -24,6 +24,14 @@ class usersApi {
       path: '/users/' + userId
     });
   }
+
+  static getUsers(accessToken, searchString) {
+    return requestPromiseComposer({
+      user: {accessToken},
+      path: '/users',
+      params: { name: searchString }
+    });
+  }
 }
 
 export default usersApi;

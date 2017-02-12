@@ -4,6 +4,7 @@ import App from './components/App';
 import HomePage from './components/home/HomePage';
 import ItemListsPage from './components/itemslist/ItemListsPage';
 import ItemsPage from './components/items/ItemsPage';
+import UsersPage from './components/users/UsersPage';
 
 
 export default (
@@ -11,5 +12,6 @@ export default (
     <IndexRoute component={HomePage}/>
     <Route path="lists" component={ItemListsPage}/>
     <Route path="lists/:id" component={ItemsPage} />
+    <Route path="users" components={UsersPage} />
   </Route>
 );

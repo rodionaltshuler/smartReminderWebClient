@@ -22,3 +22,27 @@ export function loginSuccess(user) {
     user
   };
 }
+
+export function getUsersByName(me, searchString) {
+  return function (dispatch) {
+    dispatch(beginAjaxCall());
+    return serverItemListsApi.getUsers(me.accessToken, searchString)
+      .then(users => {
+        dispatch(getUsersByNameSuccess(users, searchString));
+      })
+      .catch(error => {
+        dispatch(ajaxCallError());
+        throw error;
+      })
+
+  };
+}
+
+export function getUsersByNameSuccess(users, searchString) {
+  return {
+    type: types.GET_USERS_BY_NAME_SUCCESS,
+    users,
+    searchString
+  };
+}
+

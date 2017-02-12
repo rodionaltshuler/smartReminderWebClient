@@ -15,10 +15,11 @@ class UsersList extends React.Component {
   render() {
     return (
       <div>
-        <h2>{this.props.listCaption}</h2>
         <table className="table">
           <tbody>
-          {this.props.usersList.map(
+          {this.props.usersList
+            .filter(user => this.props.excludedUserIds.indexOf(user._id) < 0)
+            .map(
             user => {
               return (
                 <UserRow
@@ -38,10 +39,10 @@ class UsersList extends React.Component {
 
 }
 UsersList.propTypes = {
-  listCaption: React.PropTypes.string.isRequired,
   usersList: React.PropTypes.array.isRequired,
   itemActionHandler: React.PropTypes.func.isRequired,
-  itemActionCaption: React.PropTypes.string.isRequired
+  itemActionCaption: React.PropTypes.string.isRequired,
+  excludedUserIds: React.PropTypes.array.isRequired
 };
 
 export default UsersList;

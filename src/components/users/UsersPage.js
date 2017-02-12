@@ -13,11 +13,14 @@ class UsersPage extends React.Component {
   }
 
   render() {
-    return <UsersContainer
-      title="Smart Reminder users"
-      itemActionHandler={this.showUser}
-      itemActionCaption="Show"
-    />
+    return (
+      <UsersContainer
+        title="Smart Reminder users"
+        itemActionHandler={this.showUser}
+        itemActionCaption="Show"
+        excludedUserIds={[]}
+      />
+    );
   }
 
 }

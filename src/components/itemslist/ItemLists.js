@@ -8,6 +8,11 @@ class ItemLists extends React.Component {
 
     this.onRemoveItemsList = this.onRemoveItemsList.bind(this);
     this.onShowListContents = this.onShowListContents.bind(this);
+    this.onInviteUser = this.onInviteUser.bind(this);
+  }
+
+  onInviteUser(itemsList, user) {
+    this.props.inviteUserHandler(itemsList, user);
   }
 
   onRemoveItemsList(itemsList) {
@@ -20,7 +25,7 @@ class ItemLists extends React.Component {
 
   render() {
     return (
-      <table className="table">
+      <table className="table myTable">
         <tbody>
         {this.props.itemLists.map(
           itemsList => {
@@ -30,6 +35,7 @@ class ItemLists extends React.Component {
                 itemsList={itemsList}
                 removeItemHandler={this.onRemoveItemsList}
                 showItemsListHandler={this.onShowListContents}
+                inviteUserHandler={this.onInviteUser}
               />
             );
           }
@@ -43,7 +49,8 @@ class ItemLists extends React.Component {
 ItemLists.propTypes = {
   itemLists: React.PropTypes.array.isRequired,
   removeItemHandler: React.PropTypes.func.isRequired,
-  showListContentsHandler: React.PropTypes.func.isRequired
+  showListContentsHandler: React.PropTypes.func.isRequired,
+  inviteUserHandler: React.PropTypes.func.isRequired
 };
 
 export default ItemLists;

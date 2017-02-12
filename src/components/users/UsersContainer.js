@@ -31,6 +31,8 @@ class UsersContainer extends React.Component {
   render() {
     return (
       <div>
+        <br />
+        <h3>{this.props.title}</h3>
         <input type="text"
                onChange={this.onSearchStringChange}
                value={this.state.searchString}/>
@@ -44,10 +46,11 @@ class UsersContainer extends React.Component {
 
 
         <UsersList
-          listCaption={this.props.title}
           usersList={this.props.users}
           itemActionHandler={this.props.itemActionHandler}
-          itemActionCaption={this.props.itemActionCaption}/>
+          itemActionCaption={this.props.itemActionCaption}
+          excludedUserIds={this.props.excludedUserIds}
+        />
       </div>
     );
   }
@@ -59,7 +62,8 @@ UsersContainer.propTypes = {
   itemActionCaption: React.PropTypes.string.isRequired,
   actions: React.PropTypes.object.isRequired,
   users: React.PropTypes.array,
-  me: React.PropTypes.object
+  me: React.PropTypes.object,
+  excludedUserIds: React.PropTypes.array.isRequired
 };
 
 function mapStateToProps(state, ownProps) {

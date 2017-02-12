@@ -22,6 +22,7 @@ class ItemListsPage extends React.Component {
     this.onRemoveItemsList = this.onRemoveItemsList.bind(this);
     this.onShowListContents = this.onShowListContents.bind(this);
     this.showSaved = this.showSaved.bind(this);
+    this.onInviteUser = this.onInviteUser.bind(this);
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -57,6 +58,10 @@ class ItemListsPage extends React.Component {
     this.setState({saving: false, unsavedItemsListName: ''})
   }
 
+  onInviteUser(itemsList, user) {
+    toastr.success('Inviting user ' + user.name + ' to list ' + itemsList.name);
+  }
+
   onRemoveItemsList(itemsList) {
     if (itemsList) {
       console.log("OnRemoveItemsList arg: " + JSON.stringify(itemsList));
@@ -84,7 +89,9 @@ class ItemListsPage extends React.Component {
         <ItemLists
           itemLists={this.props.itemLists}
           removeItemHandler={this.onRemoveItemsList}
-          showListContentsHandler={this.onShowListContents}/>
+          showListContentsHandler={this.onShowListContents}
+          inviteUserHandler={this.onInviteUser}
+        />
         <h2>Add List</h2>
         <input type="text"
                onChange={this.onNameChange}

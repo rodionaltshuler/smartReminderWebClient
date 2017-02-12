@@ -18,3 +18,6 @@ nav {
   color: #ffffff;
   background: green;
 }
+
+.myTable {border-collapse: collapse;}
+.bottom-border { border-bottom: 1px dashed black; }

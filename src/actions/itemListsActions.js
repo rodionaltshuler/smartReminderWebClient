@@ -1,5 +1,6 @@
 import * as types from './actionTypes';
 import serverItemListsApi from '../serverapi/itemListsApi';
+import usersApi from '../serverapi/usersApi';
 import {beginAjaxCall, ajaxCallError} from './ajaxStatusActions';
 
 export function addItemsList(user, itemsListName) {
@@ -66,3 +67,28 @@ export function loadItemListsSuccess(itemLists) {
   };
 }
 
+export function shareListWithUser(me, itemsList, user) {
+  return function (dispatch) {
+    dispatch(beginAjaxCall());
+    return usersApi.shareListWithUser(me.accessToken, itemsList._id, user._id)
+      .then(updatedList => {
+        dispatch(shareListWithUserSuccess(updatedList, user));
+      })
+      .catch(error => {
+        dispatch(ajaxCallError());
+        throw error;
+      })
+
+  };
+
+}
+
+
+export function shareListWithUserSuccess(itemsList, user) {
+  return{
+    type: types.SHARE_LIST_WITH_USER_SUCCESS,
+    itemsList,
+    user
+  }
+
+}

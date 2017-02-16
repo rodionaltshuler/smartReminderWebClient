@@ -18,6 +18,10 @@ export default function itemListsReducer(state = [], action) {
     case types.REMOVE_ITEMS_LIST_SUCCESS: {
       return state.filter(element => element !== action.itemsList);
     }
+    case types.SHARE_LIST_WITH_USER_SUCCESS: {
+      let otherLists = state.filter(element => element._id != action.itemsList._id);
+      return [...action.itemsList, ...otherLists];
+    }
     default: {
       return state;
     }

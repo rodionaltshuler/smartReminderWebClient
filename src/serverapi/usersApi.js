@@ -32,6 +32,14 @@ class usersApi {
       params: { name: searchString }
     });
   }
+
+  static shareListWithUser(accessToken, listId, userId) {
+    return requestPromiseComposer({
+      path: '/invite/' + listId + '/' + userId,
+      method: 'POST',
+      user: {accessToken}
+    });
+  }
 }
 
 export default usersApi;

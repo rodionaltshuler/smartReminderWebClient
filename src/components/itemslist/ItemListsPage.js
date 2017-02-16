@@ -59,7 +59,13 @@ class ItemListsPage extends React.Component {
   }
 
   onInviteUser(itemsList, user) {
-    toastr.success('Inviting user ' + user.name + ' to list ' + itemsList.name);
+    this.props.actions.shareListWithUser(this.props.me, itemsList, user)
+      .then(() => {
+        toastr.success(user.name + ' now has access to ' + itemsList.name);
+      })
+      .catch(error => {
+        toastr.error(error);
+      });
   }
 
   onRemoveItemsList(itemsList) {

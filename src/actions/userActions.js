@@ -45,4 +45,3 @@ export function getUsersByNameSuccess(users, searchString) {
     searchString
   };
 }
-

@@ -17,7 +17,27 @@ nav {
 .btn {
   color: #ffffff;
   background: green;
+  display: inline-block;
+  height: 36px;
+  margin-left: 8px;
+  margin-right: 8px;
 }
 
-.myTable {border-collapse: collapse;}
-.bottom-border { border-bottom: 1px dashed black; }
+.item-container {
+  background-color: lightgrey;
+}
+
+.item-row {
+  display: flex;
+  margin: 4px;
+  padding: 12px;
+  width: 100%;
+}
+
+.item-title {
+  width: 200px;
+  vertical-align: middle;
+  text-align: left;
+  margin: 8px;
+  flex: 1;
+}

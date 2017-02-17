@@ -35,35 +35,34 @@ class ItemsListRow extends React.Component {
   render() {
     const itemsList = this.props.itemsList;
 
-    const itemRow = (
-      <tr>
-        <td>{itemsList.name}</td>
-        <td><input type="submit" className="btn" value="Open" onClick={this.showItemsList}/></td>
-        <td><input type="submit" className="btn" value={this.state.collaboratingUsersExpanded ? "Hide users" : "Invite users"}
-                   onClick={this.toggleCollaboratingUsers}/></td>
-        <td><input type="submit" className="btn btn-danger" value="Remove" onClick={this.removeItemsList}/></td>
-      </tr>
-    );
-
     const expandedUsers = this.state.collaboratingUsersExpanded ?
       (
-        <tr>
+        <div className="item-row">
           <UsersContainer
             title="Invite users"
             itemActionHandler={this.inviteUser}
             itemActionCaption="Invite"
             excludedUserIds={this.props.itemsList.collaboratingUsers}
           />
-        </tr>
+        </div>
       )
       : null;
 
-    return (
-      <div className="bottom-border">
-        {itemRow}
+    const itemRow = (
+      <div className="item-container">
+        <div className="item-row">
+          <div className="item-title"> {itemsList.name} </div>
+          <input type="submit" className="btn" value="Open" onClick={this.showItemsList}/>
+          <input type="submit" className="btn"
+                 value={this.state.collaboratingUsersExpanded ? "Hide users" : "Invite users"}
+                 onClick={this.toggleCollaboratingUsers}/>
+          <input type="submit" className="btn btn-danger" value="Remove" onClick={this.removeItemsList}/>
+        </div>
         {expandedUsers}
       </div>
     );
+
+    return itemRow;
   }
 
 }

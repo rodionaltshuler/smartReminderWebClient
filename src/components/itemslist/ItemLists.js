@@ -25,8 +25,7 @@ class ItemLists extends React.Component {
 
   render() {
     return (
-      <table className="table myTable">
-        <tbody>
+      <div>
         {this.props.itemLists.map(
           itemsList => {
             return (
@@ -40,8 +39,7 @@ class ItemLists extends React.Component {
             );
           }
         )}
-        </tbody>
-      </table>
+      </div>
     );
   }
 

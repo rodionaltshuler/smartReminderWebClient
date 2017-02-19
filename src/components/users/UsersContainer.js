@@ -16,6 +16,7 @@ class UsersContainer extends React.Component {
 
     this.onClickSearch = this.onClickSearch.bind(this);
     this.onSearchStringChange = this.onSearchStringChange.bind(this);
+    this.getUsers = this.getUsers.bind(this);
   }
 
   onClickSearch() {
@@ -28,7 +29,19 @@ class UsersContainer extends React.Component {
     });
   }
 
+  getUsers() {
+    try {
+      return this.props.users.searches[this.state.searchString]
+        .map(userId => this.props.users.cache[userId])
+        .filter(user => user);
+    } catch (err) {
+      return [];
+    }
+  }
+
+
   render() {
+    const users = this.getUsers();
     return (
       <div>
         <br />
@@ -44,9 +57,8 @@ class UsersContainer extends React.Component {
           value={this.state.searching ? 'Searching...' : 'Search'}
           onClick={this.onClickSearch}/>
 
-
         <UsersList
-          usersList={this.props.users}
+          usersList={users}
           itemActionHandler={this.props.itemActionHandler}
           itemActionCaption={this.props.itemActionCaption}
           excludedUserIds={this.props.excludedUserIds}
@@ -61,7 +73,7 @@ UsersContainer.propTypes = {
   itemActionHandler: React.PropTypes.func.isRequired,
   itemActionCaption: React.PropTypes.string.isRequired,
   actions: React.PropTypes.object.isRequired,
-  users: React.PropTypes.array,
+  users: React.PropTypes.object,
   me: React.PropTypes.object,
   excludedUserIds: React.PropTypes.array.isRequired
 };

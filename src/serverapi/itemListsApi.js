@@ -1,10 +1,14 @@
 import config from './config';
+import requestPromiseComposer from './requestPromiseComposer';
 
 class ItemListsApi {
 
-  static getAllItemLists(user) {
-    const request = createRequest(user, '/itemLists');
-    return createPromise(request);
+  static getAllItemLists(user, includeUsers = true) {
+    return requestPromiseComposer({
+      user: user,
+      path: '/itemLists',
+      params: { includeUsers: includeUsers }
+    });
   }
 
   static saveItemsList(user, itemsListName) {

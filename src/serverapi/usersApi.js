@@ -25,6 +25,14 @@ class usersApi {
     });
   }
 
+  static getUsersByIds(accessToken, ids) {
+    return requestPromiseComposer({
+      user: {accessToken},
+      path: '/usersByIds',
+      params: { ids: ids.join(',') }
+    });
+  }
+
   static getUsers(accessToken, searchString) {
     return requestPromiseComposer({
       user: {accessToken},

@@ -1,17 +1,22 @@
 import React, {PropTypes} from 'react';
 
-const CollaboratingsUsersContainer = ({me, itemsList}) => {
-  return (
-    <div>
-      {itemsList.collaboratingUsers
-        .filter(id => id != me._id)
-        .join(", ")}
-    </div>
-  );
+const CollaboratingsUsersContainer = ({users = [], me = {}}) => {
+  if (users && users.length > 1) {
+    return (<div>
+        Collaborating on this list with: &nbsp;
+        {users
+          .filter(user => user && user._id != me._id)
+          .map(user => user.name)
+          .join(',')}
+      </div>
+    );
+  } else {
+    return <div></div>;
+  }
 };
 
 CollaboratingsUsersContainer.propTypes = {
-  itemsList: React.PropTypes.object.isRequired,
+  users: React.PropTypes.array.isRequired,
   me: React.PropTypes.object.isRequired
 };
 

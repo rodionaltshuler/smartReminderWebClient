@@ -45,3 +45,10 @@ export function getUsersByNameSuccess(users, searchString) {
     searchString
   };
 }
+
+export function getUsersByIdSuccess(users) {
+  return {
+    type: types.GET_USERS_BY_ID_SUCCESS,
+    users
+  }
+}

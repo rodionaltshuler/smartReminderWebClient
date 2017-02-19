@@ -60,7 +60,7 @@ class ItemsListRow extends React.Component {
           <input type="submit" className="btn btn-danger" value="Remove" onClick={this.removeItemsList}/>
         </div>
         <div className="flex-wrap">
-          <CollaboratingUsersContainer itemsList={this.props.itemsList} me={this.props.me}/>
+          <CollaboratingUsersContainer me={this.props.me} users={this.props.users}/>
         </div>
         {expandedUsers}
       </div>
@@ -73,6 +73,7 @@ class ItemsListRow extends React.Component {
 
 ItemsListRow.propTypes = {
   me: React.PropTypes.object.isRequired,
+  users: React.PropTypes.array.isRequired,
   itemsList: React.PropTypes.object.isRequired,
   removeItemHandler: React.PropTypes.func.isRequired,
   showItemsListHandler: React.PropTypes.func.isRequired,

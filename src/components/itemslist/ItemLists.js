@@ -34,6 +34,7 @@ class ItemLists extends React.Component {
                   key={itemsList._id}
                   me={this.props.me}
                   itemsList={itemsList}
+                  users={itemsList.collaboratingUsers.map(id => this.props.users[id])}
                   removeItemHandler={this.onRemoveItemsList}
                   showItemsListHandler={this.onShowListContents}
                   inviteUserHandler={this.onInviteUser}
@@ -52,6 +53,7 @@ class ItemLists extends React.Component {
 }
 ItemLists.propTypes = {
   me: React.PropTypes.object,
+  users: React.PropTypes.object.isRequired,
   itemLists: React.PropTypes.array.isRequired,
   removeItemHandler: React.PropTypes.func.isRequired,
   showListContentsHandler: React.PropTypes.func.isRequired,

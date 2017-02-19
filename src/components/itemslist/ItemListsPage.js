@@ -91,6 +91,7 @@ class ItemListsPage extends React.Component {
         <h2>My lists</h2>
         <ItemLists
           me={this.props.me}
+          users={this.props.users}
           itemLists={this.props.itemLists}
           removeItemHandler={this.onRemoveItemsList}
           showListContentsHandler={this.onShowListContents}
@@ -115,12 +116,14 @@ class ItemListsPage extends React.Component {
 ItemListsPage.propTypes = {
   itemLists: React.PropTypes.array.isRequired,
   actions: React.PropTypes.object.isRequired,
+  users: React.PropTypes.object.isRequired,
   me: React.PropTypes.object
 };
 
 function mapStateToProps(state, ownProps) {
   return {
     itemLists: state.itemLists,
+    users: state.users.cache,
     me: state.me
   };
 }

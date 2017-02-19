@@ -25,15 +25,11 @@ class ItemListsPage extends React.Component {
     this.onInviteUser = this.onInviteUser.bind(this);
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (prevProps.me !== this.props.me) {
-      this.props.actions.loadItemLists(this.props.me);
-    }
-  }
-
-  componentDidMount() {
-    if (this.props.me) {
-      this.props.actions.loadItemLists(this.props.me);
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.me) {
+      if (this.props.me !== nextProps.me) {
+        this.props.actions.loadItemLists(nextProps.me);
+      }
     }
   }
 
@@ -89,10 +85,12 @@ class ItemListsPage extends React.Component {
   }
 
   render() {
+    console.log("ItemListsPage: render, me is " + this.props.me);
     return (
       <div>
         <h2>My lists</h2>
         <ItemLists
+          me={this.props.me}
           itemLists={this.props.itemLists}
           removeItemHandler={this.onRemoveItemsList}
           showListContentsHandler={this.onShowListContents}

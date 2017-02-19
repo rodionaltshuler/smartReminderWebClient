@@ -1,5 +1,6 @@
 import React from 'react';
 import UsersContainer from '../users/UsersContainer';
+import CollaboratingUsersContainer from '../users/CollaboratingUsersContainer';
 
 class ItemsListRow extends React.Component {
 
@@ -58,6 +59,9 @@ class ItemsListRow extends React.Component {
                  onClick={this.toggleCollaboratingUsers}/>
           <input type="submit" className="btn btn-danger" value="Remove" onClick={this.removeItemsList}/>
         </div>
+        <div className="flex-wrap">
+          <CollaboratingUsersContainer itemsList={this.props.itemsList} me={this.props.me}/>
+        </div>
         {expandedUsers}
       </div>
     );
@@ -68,6 +72,7 @@ class ItemsListRow extends React.Component {
 }
 
 ItemsListRow.propTypes = {
+  me: React.PropTypes.object.isRequired,
   itemsList: React.PropTypes.object.isRequired,
   removeItemHandler: React.PropTypes.func.isRequired,
   showItemsListHandler: React.PropTypes.func.isRequired,

@@ -24,27 +24,34 @@ class ItemLists extends React.Component {
   }
 
   render() {
-    return (
-      <div>
-        {this.props.itemLists.map(
-          itemsList => {
-            return (
-              <ItemsListRow
-                key={itemsList._id}
-                itemsList={itemsList}
-                removeItemHandler={this.onRemoveItemsList}
-                showItemsListHandler={this.onShowListContents}
-                inviteUserHandler={this.onInviteUser}
-              />
-            );
-          }
-        )}
-      </div>
-    );
+    if (this.props.me) {
+      return (
+        <div>
+          {this.props.itemLists.map(
+            itemsList => {
+              return (
+                <ItemsListRow
+                  key={itemsList._id}
+                  me={this.props.me}
+                  itemsList={itemsList}
+                  removeItemHandler={this.onRemoveItemsList}
+                  showItemsListHandler={this.onShowListContents}
+                  inviteUserHandler={this.onInviteUser}
+                />
+              );
+            }
+          )}
+        </div>
+      );
+    } else {
+      return <div>Please log in</div>
+    }
+
   }
 
 }
 ItemLists.propTypes = {
+  me: React.PropTypes.object,
   itemLists: React.PropTypes.array.isRequired,
   removeItemHandler: React.PropTypes.func.isRequired,
   showListContentsHandler: React.PropTypes.func.isRequired,

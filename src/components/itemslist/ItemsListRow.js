@@ -56,7 +56,7 @@ class ItemsListRow extends React.Component {
           <input type="submit" className="btn"
                  value={this.state.collaboratingUsersExpanded ? "Hide users" : "Invite users"}
                  onClick={this.toggleCollaboratingUsers}/>
-          <input type="submit" className="btn btn-danger" value="Remove list" onClick={this.removeItemsList}/>
+          <input type="submit" className="btn btn-remove" value="Remove list" onClick={this.removeItemsList}/>
         </div>
         <div className="flex-wrap">
           <CollaboratingUsersContainer me={this.props.me} users={this.props.users}/>

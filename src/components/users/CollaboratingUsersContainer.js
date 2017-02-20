@@ -2,7 +2,7 @@ import React, {PropTypes} from 'react';
 
 const CollaboratingsUsersContainer = ({users = [], me = {}}) => {
   if (users && users.length > 1) {
-    return (<div>
+    return (<div className="item-row">
         Collaborating on this list with: &nbsp;
         {users
           .filter(user => user && user._id != me._id)

@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import  * as itemListsActions from '../../actions/itemListsActions';
 import {bindActionCreators} from 'redux';
 import ItemLists from './ItemLists';
-import {browserHistory} from 'react-router';
 import toastr from 'toastr';
 
 class ItemListsPage extends React.Component {
@@ -80,15 +79,32 @@ class ItemListsPage extends React.Component {
   onShowListContents(itemsList) {
     if (itemsList) {
       console.log("onShowListContents arg: " + JSON.stringify(itemsList));
-      browserHistory.push('/lists/' + itemsList._id);
     }
   }
 
   render() {
     console.log("ItemListsPage: render, me is " + this.props.me);
+    const addList = this.props.me ?
+      (
+        <div className="item-row">
+          <br />
+          <input type="text"
+                 placeholder="Type list title here"
+                 onChange={this.onNameChange}
+                 value={this.state.unsavedItemsListName}/>
+
+          <input
+            type="submit"
+            disabled={this.state.saving}
+            className="btn"
+            value={this.state.saving ? 'Saving...' : 'Add another list'}
+            onClick={this.onClickSave}/>
+        </div>
+      )
+      : null;
+
     return (
       <div>
-        <h2>My lists</h2>
         <ItemLists
           me={this.props.me}
           users={this.props.users}
@@ -97,17 +113,7 @@ class ItemListsPage extends React.Component {
           showListContentsHandler={this.onShowListContents}
           inviteUserHandler={this.onInviteUser}
         />
-        <h2>Add List</h2>
-        <input type="text"
-               onChange={this.onNameChange}
-               value={this.state.unsavedItemsListName}/>
-
-        <input
-          type="submit"
-          disabled={this.state.saving}
-          className="btn"
-          value={this.state.saving ? 'Saving...' : 'Save'}
-          onClick={this.onClickSave}/>
+        {addList}
       </div>
     );
   }

@@ -22,14 +22,14 @@ class AddItem extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="item-row">
         <input type="text"
                onChange={this.onItemNameChange}
                value={this.state.newItemName}
         />
 
         <input type="submit"
-               value="Add"
+               value="Add item"
                className="btn"
                onClick={this.onSave}/>
       </div>

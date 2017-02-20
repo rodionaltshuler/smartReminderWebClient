@@ -1,7 +1,7 @@
 import React from 'react';
 import UsersContainer from '../users/UsersContainer';
 import CollaboratingUsersContainer from '../users/CollaboratingUsersContainer';
-
+import ItemsContainer from '../items/ItemsContainer';
 class ItemsListRow extends React.Component {
 
   constructor(props, context) {
@@ -52,15 +52,17 @@ class ItemsListRow extends React.Component {
     const itemRow = (
       <div className="item-container">
         <div className="item-row">
-          <div className="item-title"> {itemsList.name} </div>
-          <input type="submit" className="btn" value="Open" onClick={this.showItemsList}/>
+          <div className="item-title h3"> {itemsList.name} </div>
           <input type="submit" className="btn"
                  value={this.state.collaboratingUsersExpanded ? "Hide users" : "Invite users"}
                  onClick={this.toggleCollaboratingUsers}/>
-          <input type="submit" className="btn btn-danger" value="Remove" onClick={this.removeItemsList}/>
+          <input type="submit" className="btn btn-danger" value="Remove list" onClick={this.removeItemsList}/>
         </div>
         <div className="flex-wrap">
           <CollaboratingUsersContainer me={this.props.me} users={this.props.users}/>
+        </div>
+        <div>
+          <ItemsContainer itemsList={this.props.itemsList}/>
         </div>
         {expandedUsers}
       </div>

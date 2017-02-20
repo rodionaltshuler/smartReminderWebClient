@@ -6,7 +6,7 @@ import AddItem from './AddItem';
 import ItemRow from './ItemRow';
 
 
-class ItemsPage extends React.Component {
+class ItemsContainer extends React.Component {
 
   constructor(props, context) {
     super(props, context);
@@ -15,17 +15,17 @@ class ItemsPage extends React.Component {
   }
 
   componentDidMount() {
-    this.props.actions.loadItemsForList(this.props.me, this.props.params.id);
+    this.props.actions.loadItemsForList(this.props.me, this.props.itemsList._id);
   }
 
   componentDidUpdate(prevProps, prevState) {
     if (prevProps.me !== this.props.me) {
-      this.props.actions.loadItemsForList(this.props.me, this.props.params.id);
+      this.props.actions.loadItemsForList(this.props.me, this.props.itemsList._id);
     }
   }
 
   addItemHandler(itemName) {
-    const listId = this.props.params.id;
+    const listId = this.props.itemsList._id;
     this.props.actions.addItem(this.props.me, listId, itemName);
   }
 
@@ -36,16 +36,8 @@ class ItemsPage extends React.Component {
   render() {
     return (
       <div>
-        <table className="table">
-          <thead>
-          <tr>
-            <th>{this.props.currentList ? this.props.currentList.name : "Please log in"}</th>
-            <th>&nbsp;</th>
-          </tr>
-          </thead>
-          <tbody>
-          {this.props.items
-            .map(
+        {this.props.items
+          .map(
             item => {
               return (
                 <ItemRow
@@ -56,31 +48,22 @@ class ItemsPage extends React.Component {
               );
             }
           )}
-          </tbody>
-        </table>
-        <br/>
         <AddItem addItemHandler={this.addItemHandler}/>
       </div>
     );
   }
 }
 
-ItemsPage.propTypes = {
-  params: React.PropTypes.object.isRequired,
-  items: React.PropTypes.array.isRequired,
-  itemLists: React.PropTypes.array.isRequired,
-  actions: React.PropTypes.object.isRequired,
-  currentList: React.PropTypes.object,
+ItemsContainer.propTypes = {
+  itemsList: React.PropTypes.object.isRequired,
+  actions: React.PropTypes.object,
   me: React.PropTypes.object
 };
 
 function mapStateToProps(state, ownProps) {
   return {
-    items: state.items.filter(item => item.itemsList == ownProps.params.id),
-    me: state.me,
-    currentList: state.itemLists ?
-      state.itemLists.find(itemsList => ownProps.params.id === itemsList._id) :
-      null
+    items: state.items.filter(item => item.itemsList == ownProps.itemsList._id),
+    me: state.me
   };
 }
 
@@ -90,4 +73,4 @@ function mapDispatchToProps(dispatch) {
   };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ItemsPage);
+export default connect(mapStateToProps, mapDispatchToProps)(ItemsContainer);

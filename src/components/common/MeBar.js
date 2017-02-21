@@ -14,7 +14,7 @@ class MeBar extends React.Component {
       return (
         <div>
           <img className="img-circle"
-               src={'http://graph.facebook.com/' + user.oauth + '/picture?type=square'}
+               src={'https://graph.facebook.com/' + user.oauth + '/picture?type=square'}
                width='36px' height='36px'
           />
           &nbsp; {user.name}

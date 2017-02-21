@@ -25,6 +25,7 @@ class AddItem extends React.Component {
       <div className="item-row">
         <input type="text"
                onChange={this.onItemNameChange}
+               placeholder="What else to buy?"
                value={this.state.newItemName}
         />
 
